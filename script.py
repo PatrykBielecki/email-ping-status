@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import time
 import subprocess
@@ -9,14 +10,21 @@ from colorama import init, Fore, Style
 init(autoreset=True)
 os.system("chcp 65001")
 
+def get_executable_dir():
+    if getattr(sys, 'frozen', False):
+        return os.path.dirname(sys.executable)
+    return os.path.dirname(__file__)
+
 def load_config():
-    with open('config.json', 'r', encoding='utf-8') as file:
+    config_path = os.path.join(get_executable_dir(), 'config.json')
+    with open(config_path, 'r', encoding='utf-8') as file:
         return json.load(file)
 
 def load_devices():
+    devices_path = os.path.join(get_executable_dir(), 'devices.txt')
     devices = []
     invalid_lines = []
-    with open('devices.txt', 'r', encoding='utf-8') as file:
+    with open(devices_path, 'r', encoding='utf-8') as file:
         for line in file:
             line = line.strip()
             if not line:
@@ -26,7 +34,6 @@ def load_devices():
                 devices.append((ip.strip(), name.strip()))
             else:
                 invalid_lines.append(line)
-                print(Fore.RED + f"Invalid line in devices.txt: {line}")
     return devices, invalid_lines
 
 def ping_host(ip, name, attempts):
