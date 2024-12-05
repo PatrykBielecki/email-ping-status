@@ -1,0 +1,16 @@
+{
+    "email": {
+        "smtp_server": "",
+        "port": 0,
+        "sender_email": "",
+        "password": "",
+        "receiver_email": ""
+    },
+    "ping": {
+        "attempts_per_check": 3,
+        "check_retries": 1,
+        "time_between_checks_seconds": 10
+    },
+    "sendOnSingleFail": true,
+    "debugMode": false
+}
