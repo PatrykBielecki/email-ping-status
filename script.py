@@ -119,10 +119,8 @@ def main():
 
 if __name__ == "__main__":
     config = load_config()
-    if not config['debugMode']:
-        import ctypes
-        ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
-        main()
-    else:
+    if config['debugMode']:
         main()
         input(Fore.YELLOW + "Press any key to exit...")
+    else:
+        main()
