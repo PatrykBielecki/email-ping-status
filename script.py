@@ -122,4 +122,7 @@ if __name__ == "__main__":
     if not config['debugMode']:
         import ctypes
         ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
-    main()
+        main()
+    else:
+        main()
+        input(Fore.YELLOW + "Press any key to exit...")
